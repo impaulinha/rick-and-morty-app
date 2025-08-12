@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar'
-import { Text, View } from 'react-native'
 import {
   useFonts,
   Poppins_400Regular,
@@ -9,6 +8,7 @@ import {
   Poppins_300Light,
 } from '@expo-google-fonts/poppins'
 import * as SplashScreen from 'expo-splash-screen'
+import { Start } from './src/screens/Start'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -33,9 +33,7 @@ export default function App() {
   return (
     <>
       <StatusBar translucent />
-      <View>
-        <Text>App inicial</Text>
-      </View>
+      <Start />
     </>
   )
 }
