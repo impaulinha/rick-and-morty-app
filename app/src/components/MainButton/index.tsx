@@ -8,7 +8,11 @@ type MainsButtonProps = TouchableOpacityProps & {
 
 export function MainButton({ text, action }: MainsButtonProps) {
   return (
-    <TouchableOpacity onPress={action} style={styles.container}>
+    <TouchableOpacity
+      onPress={action}
+      style={styles.container}
+      activeOpacity={0.8}
+    >
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   )
