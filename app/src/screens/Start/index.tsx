@@ -18,7 +18,7 @@ export function Start() {
       </View>
       <View style={styles.viewImg}>
         <Picture
-          diameter={320}
+          diameter={0.8}
           source={require('../../assets/rickandmorty.png')}
         />
       </View>
