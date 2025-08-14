@@ -1,12 +1,15 @@
 import { View, Text, SafeAreaView } from 'react-native'
-import { styles } from './styles'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { StackParamList } from '../../routes/stacks.routes'
 import { MainButton } from '../../components/MainButton'
+import { useNavigation } from '@react-navigation/native'
 import { Picture } from '../../components/Picture'
+import { styles } from './styles'
+
+type NavigationProp = NativeStackNavigationProp<StackParamList, 'Start'>
 
 export function Start() {
-  function handleAcess() {
-    console.log('ok')
-  }
+  const navigation = useNavigation<NavigationProp>()
 
   return (
     <SafeAreaView style={styles.container}>
@@ -14,7 +17,7 @@ export function Start() {
         <Text style={styles.title}>The Rick and Morty App</Text>
       </View>
       <View style={styles.viewBotton}>
-        <MainButton text="Acessar" action={handleAcess} />
+        <MainButton text="Acessar" action={() => navigation.navigate('Tabs')} />
       </View>
       <View style={styles.viewImg}>
         <Picture

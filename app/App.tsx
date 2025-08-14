@@ -8,7 +8,7 @@ import {
   Poppins_300Light,
 } from '@expo-google-fonts/poppins'
 import * as SplashScreen from 'expo-splash-screen'
-import { Start } from './src/screens/Start'
+import { Routes } from './src/routes'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -32,8 +32,8 @@ export default function App() {
 
   return (
     <>
-      <StatusBar translucent />
-      <Start />
+      <StatusBar translucent style="light" />
+      <Routes />
     </>
   )
 }
