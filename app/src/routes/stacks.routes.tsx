@@ -1,6 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack'
 import { TabsRoutes } from './tabs.routes'
 import { Start } from '../screens/Start'
+import { theme } from '../global/theme'
 
 export type StackParamList = {
   Start: undefined
@@ -17,7 +18,14 @@ export function StacksRoutes() {
         component={Start}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Tabs" component={TabsRoutes} />
+      <Stack.Screen
+        name="Tabs"
+        component={TabsRoutes}
+        options={{
+          title: '',
+          headerStyle: { backgroundColor: theme.colors.primary },
+        }}
+      />
     </Stack.Navigator>
   )
 }

@@ -6,7 +6,11 @@ const Tab = createBottomTabNavigator()
 export function TabsRoutes() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Characters" component={Characters} />
+      <Tab.Screen
+        name="Characters"
+        component={Characters}
+        options={{ headerShown: false }}
+      />
     </Tab.Navigator>
   )
 }
