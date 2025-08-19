@@ -6,8 +6,14 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.primary,
   },
-  list: {
+  viewList: {
     marginTop: theme.sizes.small,
+    backgroundColor: theme.colors.background,
+    flex: 1,
+    borderTopLeftRadius: theme.sizes.large,
+    borderTopRightRadius: theme.sizes.large,
+  },
+  list: {
     borderTopLeftRadius: theme.sizes.large,
     borderTopRightRadius: theme.sizes.large,
   },
@@ -24,10 +30,23 @@ export const styles = StyleSheet.create({
     fontFamily: theme.fonts.title,
     color: theme.colors.surface,
     fontSize: theme.sizes.small,
+    textTransform: 'capitalize',
   },
   description: {
     color: theme.colors.surface,
     fontFamily: theme.fonts.subtitle,
     fontSize: theme.sizes.small - 1,
+    textTransform: 'capitalize',
+  },
+  viewInfos: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  empty: {
+    backgroundColor: 'red',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
   },
 })

@@ -1,10 +1,14 @@
+import { useState } from 'react'
 import { View, FlatList, Text } from 'react-native'
-import { styles } from './styles'
-import { Search } from '../../components/Search'
 import { Picture } from '../../components/Picture'
+import { Divider } from '../../components/Divider'
+import { Search } from '../../components/Search'
 import { Dot } from '../../components/Dot'
+import { styles } from './styles'
 
 export function Characters() {
+  const [search, setSearch] = useState('')
+
   const data = [
     {
       id: 1,
@@ -24,28 +28,53 @@ export function Characters() {
       status: 'Alive',
       tipo: 'alien',
     },
+    {
+      id: 4,
+      name: 'Hermes',
+      status: 'Alive',
+      tipo: 'alien',
+    },
   ]
+
+  function filterCharacter() {
+    return data.filter((item) =>
+      item.name.toLowerCase().includes(search.toLowerCase()),
+    )
+  }
 
   return (
     <View style={styles.container}>
-      <Search />
-      <FlatList
-        data={data}
-        style={styles.list}
-        contentContainerStyle={{ flexGrow: 1 }}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.card}>
-            <Picture diameter={0.2} />
-            <View style={styles.infos}>
-              <Text style={styles.title}>{item.name}</Text>
-              <Text style={styles.description}>
-                {item.status} <Dot /> {item.tipo}
-              </Text>
+      <Search onSearchChange={setSearch} />
+      <View style={styles.viewList}>
+        <FlatList
+          data={filterCharacter()}
+          keyExtractor={(item) => item.id.toString()}
+          style={styles.list}
+          ItemSeparatorComponent={Divider}
+          ListEmptyComponent={
+            <View style={styles.empty}>
+              <Text>Nenhum personagem encontrado</Text>
             </View>
-          </View>
-        )}
-      />
+          }
+          renderItem={({ item }) => (
+            <View style={styles.card}>
+              <Picture diameter={0.2} />
+              <View style={styles.infos}>
+                <Text style={styles.title}>{item.name}</Text>
+                <View style={styles.viewInfos}>
+                  <Text style={{ ...styles.description, marginRight: 5 }}>
+                    {item.status}
+                  </Text>
+                  <Dot />
+                  <Text style={{ ...styles.description, marginLeft: 5 }}>
+                    {item.tipo}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          )}
+        />
+      </View>
     </View>
   )
 }

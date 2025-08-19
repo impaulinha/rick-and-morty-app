@@ -7,6 +7,7 @@ export const theme = {
     error: '#b00020',
     onBackground: '#000000',
     onSurface: '#FFFFFF',
+    detail: '#eae5cb',
   },
   fonts: {
     title: 'Poppins_600SemiBold',
