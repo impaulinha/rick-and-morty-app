@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
   title: {
     fontFamily: theme.fonts.title,
     color: theme.colors.surface,
-    fontSize: theme.sizes.small,
+    fontSize: 18,
     textTransform: 'capitalize',
   },
   description: {
@@ -44,9 +44,15 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   empty: {
-    backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
+    flex: 1,
+  },
+  txtEmpty: {
+    fontSize: 20,
+    fontFamily: theme.fonts.title,
+    color: '#808080',
+    textAlign: 'center',
   },
 })

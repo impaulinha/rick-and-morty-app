@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { View, FlatList, Text } from 'react-native'
+import { View, FlatList, Text, Image } from 'react-native'
 import { Picture } from '../../components/Picture'
 import { Divider } from '../../components/Divider'
 import { Search } from '../../components/Search'
@@ -51,9 +51,17 @@ export function Characters() {
           keyExtractor={(item) => item.id.toString()}
           style={styles.list}
           ItemSeparatorComponent={Divider}
+          contentContainerStyle={{ flexGrow: 1 }}
           ListEmptyComponent={
             <View style={styles.empty}>
-              <Text>Nenhum personagem encontrado</Text>
+              <Image
+                source={require('../../assets/morty-smith.png')}
+                resizeMode="contain"
+                style={{ width: 200, height: 200 }}
+              />
+              <Text style={styles.txtEmpty}>
+                Nenhum personagem {'\n'}encontrado.
+              </Text>
             </View>
           }
           renderItem={({ item }) => (
