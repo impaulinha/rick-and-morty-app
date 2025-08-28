@@ -17,7 +17,7 @@ export function Start() {
         <Text style={styles.title}>The Rick and Morty App</Text>
       </View>
       <View style={styles.viewBotton}>
-        <MainButton text="Acessar" action={() => navigation.navigate('Tabs')} />
+        <MainButton text="Enter" action={() => navigation.navigate('Tabs')} />
       </View>
       <View style={styles.viewImg}>
         <Picture

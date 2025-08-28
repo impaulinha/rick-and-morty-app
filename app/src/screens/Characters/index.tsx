@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
-import { View, FlatList, Text, Image } from 'react-native'
+import { View, FlatList, Text, Image, TouchableOpacity } from 'react-native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { StackParamList } from '../../routes/stacks.routes'
 import { getCharacters } from '../../services/characters'
+import { useNavigation } from '@react-navigation/native'
 import { Picture } from '../../components/Picture'
 import { Divider } from '../../components/Divider'
 import { Character } from '../../types/character'
@@ -8,9 +11,15 @@ import { Search } from '../../components/Search'
 import { Dot } from '../../components/Dot'
 import { styles } from './styles'
 
+type NavigationProp = NativeStackNavigationProp<
+  StackParamList,
+  'CharacterDetails'
+>
+
 export function Characters() {
   const [search, setSearch] = useState('')
   const [characters, setCharacters] = useState<Character[]>([])
+  const navigation = useNavigation<NavigationProp>()
 
   function filterCharacter() {
     return characters.filter((item) =>
@@ -54,7 +63,15 @@ export function Characters() {
             </View>
           }
           renderItem={({ item }) => (
-            <View style={styles.card}>
+            <TouchableOpacity
+              style={styles.card}
+              activeOpacity={0.7}
+              onPress={() =>
+                navigation.navigate('CharacterDetails', {
+                  id: item.id.toString(),
+                })
+              }
+            >
               <Picture diameter={0.2} source={{ uri: item.image }} />
               <View style={styles.infos}>
                 <Text style={styles.title}>{item.name}</Text>
@@ -68,7 +85,7 @@ export function Characters() {
                   </Text>
                 </View>
               </View>
-            </View>
+            </TouchableOpacity>
           )}
         />
       </View>

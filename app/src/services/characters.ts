@@ -13,3 +13,8 @@ export async function getCharacters(filter?: {
   })
   return response.data
 }
+
+export async function getCharacterById(id: string) {
+  const response = await api.get<Character>(`character/${id}`)
+  return response.data
+}

@@ -7,4 +7,5 @@ export interface Character {
   gender: string
   image: string
   episode: string[]
+  origin: { name: string; url: string }
 }

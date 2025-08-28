@@ -1,12 +1,14 @@
+import { Text, View } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
+import Ionicons from '@react-native-vector-icons/ionicons'
 import { TabsRoutes } from './tabs.routes'
 import { Start } from '../screens/Start'
 import { theme } from '../global/theme'
-import { Text, View } from 'react-native'
-import Ionicons from '@react-native-vector-icons/ionicons'
+import { CharacterDetails } from '../screens/CharacterDetails'
 
 export type StackParamList = {
   Start: undefined
+  CharacterDetails: { id: string }
   Tabs: undefined
 }
 
@@ -17,6 +19,9 @@ export function StacksRoutes() {
     <Stack.Navigator
       screenOptions={{
         headerShadowVisible: false,
+        headerStyle: {
+          backgroundColor: theme.colors.primary,
+        },
         headerTintColor: theme.colors.onSurface,
         headerBackImage: () => (
           <Ionicons
@@ -26,12 +31,23 @@ export function StacksRoutes() {
           />
         ),
         headerTitleAlign: 'center',
+        headerTitleStyle: {
+          fontFamily: theme.fonts.title,
+          fontSize: 20,
+        },
       }}
     >
       <Stack.Screen
         name="Start"
         component={Start}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CharacterDetails"
+        component={CharacterDetails}
+        options={{
+          title: 'Character Details',
+        }}
       />
       <Stack.Screen
         name="Tabs"
