@@ -17,11 +17,11 @@ export function StacksRoutes() {
     <Stack.Navigator
       screenOptions={{
         headerShadowVisible: false,
-        headerTintColor: theme.colors.background,
+        headerTintColor: theme.colors.onSurface,
         headerBackImage: () => (
           <Ionicons
             name="chevron-back"
-            color={theme.colors.background}
+            color={theme.colors.onSurface}
             size={24}
           />
         ),
@@ -48,7 +48,7 @@ export function StacksRoutes() {
             >
               <Text
                 style={{
-                  color: theme.colors.background,
+                  color: theme.colors.onSurface,
                   fontFamily: theme.fonts.title,
                   fontSize: 30,
                   textAlign: 'center',

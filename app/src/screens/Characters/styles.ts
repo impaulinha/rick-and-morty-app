@@ -25,6 +25,8 @@ export const styles = StyleSheet.create({
   },
   infos: {
     marginLeft: theme.sizes.small,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
   },
   title: {
     fontFamily: theme.fonts.title,

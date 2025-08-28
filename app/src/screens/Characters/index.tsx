@@ -1,46 +1,35 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { View, FlatList, Text, Image } from 'react-native'
+import { getCharacters } from '../../services/characters'
 import { Picture } from '../../components/Picture'
 import { Divider } from '../../components/Divider'
+import { Character } from '../../types/character'
 import { Search } from '../../components/Search'
 import { Dot } from '../../components/Dot'
 import { styles } from './styles'
 
 export function Characters() {
   const [search, setSearch] = useState('')
-
-  const data = [
-    {
-      id: 1,
-      name: 'Teste Jose',
-      status: 'Alive',
-      tipo: 'humano',
-    },
-    {
-      id: 2,
-      name: 'Maria',
-      status: 'Alive',
-      tipo: 'humano',
-    },
-    {
-      id: 3,
-      name: 'Hermes',
-      status: 'Alive',
-      tipo: 'alien',
-    },
-    {
-      id: 4,
-      name: 'Hermes',
-      status: 'Alive',
-      tipo: 'alien',
-    },
-  ]
+  const [characters, setCharacters] = useState<Character[]>([])
 
   function filterCharacter() {
-    return data.filter((item) =>
+    return characters.filter((item) =>
       item.name.toLowerCase().includes(search.toLowerCase()),
     )
   }
+
+  async function loadData() {
+    try {
+      const data = await getCharacters()
+      setCharacters(data.results)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    loadData()
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -66,7 +55,7 @@ export function Characters() {
           }
           renderItem={({ item }) => (
             <View style={styles.card}>
-              <Picture diameter={0.2} />
+              <Picture diameter={0.2} source={{ uri: item.image }} />
               <View style={styles.infos}>
                 <Text style={styles.title}>{item.name}</Text>
                 <View style={styles.viewInfos}>
@@ -75,7 +64,7 @@ export function Characters() {
                   </Text>
                   <Dot />
                   <Text style={{ ...styles.description, marginLeft: 5 }}>
-                    {item.tipo}
+                    {item.species}
                   </Text>
                 </View>
               </View>
