@@ -1,6 +1,6 @@
 import api from './api'
 import { CharacterResponse } from '../types/CharacterResponse'
-import { Character } from '../types/character'
+import { Character } from '../types/Character'
 
 export async function getCharacters(filter?: {
   name?: string

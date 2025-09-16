@@ -1,11 +1,11 @@
-import { Character } from './Character'
+import { Episode } from './Episode'
 
-export interface CharacterResponse {
+export interface EpisodeResponse {
   info: {
     count: number
     pages: number
     next: string | null
     prev: string | null
   }
-  results: Character[]
+  results: Episode[]
 }
