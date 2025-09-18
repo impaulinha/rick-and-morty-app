@@ -17,34 +17,6 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: theme.sizes.large,
     borderTopRightRadius: theme.sizes.large,
   },
-  card: {
-    backgroundColor: theme.colors.background,
-    alignItems: 'center',
-    flexDirection: 'row',
-    padding: theme.sizes.small,
-  },
-  infos: {
-    marginLeft: theme.sizes.small,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-  },
-  title: {
-    fontFamily: theme.fonts.title,
-    color: theme.colors.surface,
-    fontSize: 18,
-    textTransform: 'capitalize',
-  },
-  description: {
-    color: theme.colors.surface,
-    fontFamily: theme.fonts.subtitle,
-    fontSize: theme.sizes.small - 1,
-    textTransform: 'capitalize',
-  },
-  viewInfos: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   empty: {
     alignItems: 'center',
     justifyContent: 'center',

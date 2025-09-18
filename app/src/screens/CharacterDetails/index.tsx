@@ -1,14 +1,20 @@
 import { useEffect, useState } from 'react'
-import { View, Text, FlatList, ScrollView } from 'react-native'
+import { View, Text, FlatList, TouchableOpacity } from 'react-native'
+import { Ionicons } from '@react-native-vector-icons/ionicons'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { getCharacterById } from '../../services/characters'
 import { StackParamList } from '../../routes/stacks.routes'
 import { getEpisodes } from '../../services/episodes'
+import {
+  isFavorite,
+  removeFavorite,
+  addFavorite,
+} from '../../services/favorites'
 import { Picture } from '../../components/Picture'
 import { Character } from '../../types/Character'
 import { Episode } from '../../types/Episode'
-import { styles } from './styles'
 import { theme } from '../../global/theme'
+import { styles } from './styles'
 
 type NavigationProp = RouteProp<StackParamList, 'CharacterDetails'>
 
@@ -17,6 +23,7 @@ export function CharacterDetails() {
   const route = useRoute<NavigationProp>()
   const { id } = route.params
   const [episodes, setEpisodes] = useState<Episode[]>([])
+  const [favorite, setFavorite] = useState(false)
 
   useEffect(() => {
     loadCharacter()
@@ -28,6 +35,9 @@ export function CharacterDetails() {
     try {
       const response = await getCharacterById(id)
       setCharacter(response)
+
+      const fav = await isFavorite(response.id)
+      setFavorite(fav)
 
       if (response.episode && response.episode.length > 0) {
         loadEpisode(response.episode)
@@ -48,6 +58,18 @@ export function CharacterDetails() {
     }
   }
 
+  async function toggleFavorite() {
+    if (!character) return
+
+    if (favorite) {
+      await removeFavorite(character.id)
+      setFavorite(false)
+    } else {
+      await addFavorite(character)
+      setFavorite(true)
+    }
+  }
+
   return (
     <FlatList
       data={episodes}
@@ -65,7 +87,23 @@ export function CharacterDetails() {
       ListHeaderComponent={
         <View style={styles.container}>
           <View style={styles.card}>
-            <Picture diameter={0.5} source={{ uri: character?.image }} />
+            <View
+              style={{
+                position: 'relative',
+              }}
+            >
+              <Picture diameter={0.5} source={{ uri: character?.image }} />
+              <TouchableOpacity
+                style={styles.favorite}
+                onPress={toggleFavorite}
+              >
+                <Ionicons
+                  name={favorite ? 'heart' : 'heart-outline'}
+                  size={45}
+                  color={favorite ? theme.colors.error : theme.colors.surface}
+                />
+              </TouchableOpacity>
+            </View>
             <Text style={styles.name}>{character?.name}</Text>
             <View style={styles.infos}>
               <View style={styles.line}>

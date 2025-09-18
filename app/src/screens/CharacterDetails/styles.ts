@@ -73,4 +73,16 @@ export const styles = StyleSheet.create({
     fontFamily: theme.fonts.body,
     fontSize: 13,
   },
+  favorite: {
+    height: 'auto',
+    width: 'auto',
+    alignItems: 'center',
+    justifyContent: 'center',
+    left: 120,
+    top: 145,
+    backgroundColor: theme.colors.background,
+    borderRadius: '50%',
+    padding: 8,
+    position: 'absolute',
+  },
 })
