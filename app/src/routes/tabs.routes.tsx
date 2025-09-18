@@ -1,7 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import Ionicons from '@react-native-vector-icons/ionicons'
 import { Characters } from '../screens/Characters'
 import { Favorites } from '../screens/Favorites'
-import Ionicons from '@react-native-vector-icons/ionicons'
+import { View, Text } from 'react-native'
 import { theme } from '../global/theme'
 
 export type TabsParamList = {
@@ -39,26 +40,51 @@ export function TabsRoutes() {
           padding: 0,
           fontSize: 12,
         },
+        headerStyle: {
+          backgroundColor: theme.colors.primary,
+        },
+        headerTitleAlign: 'center',
       }}
     >
       <Tab.Screen
         name="Characters"
         component={Characters}
         options={{
-          headerShown: false,
+          headerShown: true,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person" color={color} size={size} />
           ),
+          headerTitle: () => (
+            <Text
+              style={{
+                fontFamily: theme.fonts.title,
+                fontSize: 30,
+                textAlign: 'center',
+                color: theme.colors.onSurface,
+              }}
+            >
+              The Rick and {'\n'}Morty App
+            </Text>
+          ),
+          headerStyle: {
+            backgroundColor: theme.colors.primary,
+            height: 170,
+          },
+          headerShadowVisible: false,
         }}
       />
       <Tab.Screen
         name="Favorites"
         component={Favorites}
         options={{
-          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="heart-sharp" color={color} size={size} />
           ),
+          headerTitleStyle: {
+            fontSize: 25,
+            color: theme.colors.onSurface,
+            fontFamily: theme.fonts.title,
+          },
         }}
       />
     </Tab.Navigator>

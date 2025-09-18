@@ -1,10 +1,9 @@
-import { Text, View } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
+import { CharacterDetails } from '../screens/CharacterDetails'
 import Ionicons from '@react-native-vector-icons/ionicons'
 import { TabsRoutes } from './tabs.routes'
 import { Start } from '../screens/Start'
 import { theme } from '../global/theme'
-import { CharacterDetails } from '../screens/CharacterDetails'
 
 export type StackParamList = {
   Start: undefined
@@ -52,33 +51,7 @@ export function StacksRoutes() {
       <Stack.Screen
         name="Tabs"
         component={TabsRoutes}
-        options={{
-          headerTitle: () => (
-            <View
-              style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
-                paddingTop: 15,
-              }}
-            >
-              <Text
-                style={{
-                  color: theme.colors.onSurface,
-                  fontFamily: theme.fonts.title,
-                  fontSize: 30,
-                  textAlign: 'center',
-                }}
-              >
-                The Rick and {'\n'}Morty App
-              </Text>
-            </View>
-          ),
-          headerStyle: {
-            backgroundColor: theme.colors.primary,
-            height: 135,
-          },
-        }}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   )
