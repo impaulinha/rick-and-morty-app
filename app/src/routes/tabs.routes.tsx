@@ -68,7 +68,7 @@ export function TabsRoutes() {
           ),
           headerStyle: {
             backgroundColor: theme.colors.primary,
-            height: 170,
+            height: 160,
           },
           headerShadowVisible: false,
         }}
