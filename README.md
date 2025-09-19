@@ -42,7 +42,7 @@ Funcionalidades:
 
 Abaixo, uma demonstração da página:
 
-Splash | Start | Demonstração
+Splash | Start | Personagens
 :------ | :------: | ------:
 <img src='https://github.com/user-attachments/assets/d1dda84a-19cb-415f-b5e4-862d8506010c' width=250/> | <img src='https://github.com/user-attachments/assets/4c9d53bc-004b-4cff-80a2-55968d7b5faf' width=250/> | <img src="https://github.com/user-attachments/assets/38ff1bea-8547-4b36-9b9a-bacfbc59e1ad" width=250/>
 
