@@ -60,7 +60,7 @@ export function Favorites() {
           </Text>
         </View>
       }
-      contentContainerStyle={{ flexGrow: 1 }}
+      contentContainerStyle={{ flexGrow: 1, paddingBottom: 130 }}
     />
   )
 }

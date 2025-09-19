@@ -48,7 +48,7 @@ export function Characters() {
           keyExtractor={(item) => item.id.toString()}
           style={styles.list}
           ItemSeparatorComponent={Divider}
-          contentContainerStyle={{ flexGrow: 1 }}
+          contentContainerStyle={{ flexGrow: 1, paddingBottom: 130 }}
           ListEmptyComponent={
             <View style={styles.empty}>
               <Image
