@@ -15,6 +15,7 @@ import { Character } from '../../types/Character'
 import { Episode } from '../../types/Episode'
 import { theme } from '../../global/theme'
 import { styles } from './styles'
+import { Loading } from '../../components/Loading'
 
 type NavigationProp = RouteProp<StackParamList, 'CharacterDetails'>
 
@@ -24,6 +25,7 @@ export function CharacterDetails() {
   const { id } = route.params
   const [episodes, setEpisodes] = useState<Episode[]>([])
   const [favorite, setFavorite] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     loadCharacter()
@@ -44,6 +46,8 @@ export function CharacterDetails() {
       }
     } catch (error) {
       console.log(error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -70,7 +74,9 @@ export function CharacterDetails() {
     }
   }
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <FlatList
       data={episodes}
       keyExtractor={(item) => item.id.toString()}

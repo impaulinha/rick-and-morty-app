@@ -8,6 +8,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { StackParamList } from '../../routes/stacks.routes'
 import { Divider } from '../../components/Divider'
+import { Loading } from '../../components/Loading'
 
 type NavigationProp = NativeStackNavigationProp<
   StackParamList,
@@ -17,6 +18,7 @@ type NavigationProp = NativeStackNavigationProp<
 export function Favorites() {
   const [favorites, setFavorites] = useState<Character[]>([])
   const navigation = useNavigation<NavigationProp>()
+  const [loading, setLoading] = useState(true)
 
   useFocusEffect(
     useCallback(() => {
@@ -30,10 +32,14 @@ export function Favorites() {
       setFavorites(data)
     } catch (error) {
       console.error('Erro ao carregar favoritos:', error)
+    } finally {
+      setLoading(false)
     }
   }
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <FlatList
       data={favorites}
       keyExtractor={(item) => item.id.toString()}

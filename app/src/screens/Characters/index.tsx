@@ -9,6 +9,7 @@ import { Divider } from '../../components/Divider'
 import { Character } from '../../types/Character'
 import { Search } from '../../components/Search'
 import { styles } from './styles'
+import { Loading } from '../../components/Loading'
 
 type NavigationProp = NativeStackNavigationProp<
   StackParamList,
@@ -19,6 +20,7 @@ export function Characters() {
   const [search, setSearch] = useState('')
   const [characters, setCharacters] = useState<Character[]>([])
   const navigation = useNavigation<NavigationProp>()
+  const [loading, setLoading] = useState(true)
 
   function filterCharacter() {
     return characters.filter((item) =>
@@ -32,6 +34,8 @@ export function Characters() {
       setCharacters(data.results)
     } catch (error) {
       console.log(error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -43,35 +47,39 @@ export function Characters() {
     <View style={styles.container}>
       <Search onSearchChange={setSearch} />
       <View style={styles.viewList}>
-        <FlatList
-          data={filterCharacter()}
-          keyExtractor={(item) => item.id.toString()}
-          style={styles.list}
-          ItemSeparatorComponent={Divider}
-          contentContainerStyle={{ flexGrow: 1, paddingBottom: 130 }}
-          ListEmptyComponent={
-            <View style={styles.empty}>
-              <Image
-                source={require('../../assets/morty-smith.png')}
-                resizeMode="contain"
-                style={{ width: 200, height: 200 }}
+        {loading ? (
+          <Loading />
+        ) : (
+          <FlatList
+            data={filterCharacter()}
+            keyExtractor={(item) => item.id.toString()}
+            style={styles.list}
+            ItemSeparatorComponent={Divider}
+            contentContainerStyle={{ flexGrow: 1, paddingBottom: 130 }}
+            ListEmptyComponent={
+              <View style={styles.empty}>
+                <Image
+                  source={require('../../assets/morty-smith.png')}
+                  resizeMode="contain"
+                  style={{ width: 200, height: 200 }}
+                />
+                <Text style={styles.txtEmpty}>
+                  Nenhum personagem {'\n'}encontrado.
+                </Text>
+              </View>
+            }
+            renderItem={({ item }) => (
+              <CharacterCard
+                character={item}
+                onPress={() =>
+                  navigation.navigate('CharacterDetails', {
+                    id: item.id.toString(),
+                  })
+                }
               />
-              <Text style={styles.txtEmpty}>
-                Nenhum personagem {'\n'}encontrado.
-              </Text>
-            </View>
-          }
-          renderItem={({ item }) => (
-            <CharacterCard
-              character={item}
-              onPress={() =>
-                navigation.navigate('CharacterDetails', {
-                  id: item.id.toString(),
-                })
-              }
-            />
-          )}
-        />
+            )}
+          />
+        )}
       </View>
     </View>
   )
